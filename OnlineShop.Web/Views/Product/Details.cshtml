@@ -1,0 +1,26 @@
+﻿@model OnlineShop.Application.Models.Products.ProductDetailsViewModel
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<h1>Product Details</h1>
+
+<div>
+    <h4>@Model.Name</h4>
+    <p><strong>Product Number:</strong> @Model.ProductNumber</p>
+    <p><strong>Color:</strong> @Model.Color</p>
+    <p><strong>Standard Cost:</strong> @Model.StandardCost</p>
+    <p><strong>List Price:</strong> @Model.ListPrice</p>
+    <p><strong>Size:</strong> @Model.Size</p>
+    <p><strong>Weight:</strong> @Model.Weight</p>
+    <p><strong>Product Category ID:</strong> @Model.ProductCategoryID</p>
+    <p><strong>Product Model ID:</strong> @Model.ProductModelID</p>
+    <p><strong>Sell Start Date:</strong> @Model.SellStartDate</p>
+    <p><strong>Sell End Date:</strong> @Model.SellEndDate</p>
+    <p><strong>Discontinued Date:</strong> @Model.DiscontinuedDate</p>
+    <p><strong>RowGuid:</strong> @Model.RowGuid</p>
+    <p><strong>Modified Date:</strong> @Model.ModifiedDate</p>
+</div>
+
+<a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>

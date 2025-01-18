@@ -1,0 +1,39 @@
+﻿@model IEnumerable<OnlineShop.Application.Models.Products.ProductListViewModel>
+
+@{
+    ViewData["Title"] = "Product List";
+}
+
+<h1>Product List</h1>
+
+<a href="@Url.Action("Create", "Product")" class="btn btn-primary mb-3">Create New Product</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Product Number</th>
+            <th>Color</th>
+            <th>List Price</th>
+            <th>Modified Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.ProductNumber</td>
+                <td>@product.Color</td>
+                <td>@product.ListPrice</td>
+                <td>@product.ModifiedDate</td>
+                <td>
+                    <a href="@Url.Action("Details", "Product", new { id = product.ProductID })" class="btn btn-info">Details</a>
+                    <a href="@Url.Action("Edit", "Product", new { id = product.ProductID })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Delete", "Product", new { id = product.ProductID })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

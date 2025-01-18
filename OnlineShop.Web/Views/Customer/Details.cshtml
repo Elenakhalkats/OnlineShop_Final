@@ -1,0 +1,53 @@
+﻿@model OnlineShop.Application.Models.Customers.CustomerDetailsViewModel
+
+<h1>Customer Details</h1>
+
+<div class="form-group">
+    <label>First Name</label>
+    <p>@Model.FirstName</p>
+</div>
+
+<div class="form-group">
+    <label>Middle Name</label>
+    <p>@Model.MiddleName</p>
+</div>
+
+<div class="form-group">
+    <label>Last Name</label>
+    <p>@Model.LastName</p>
+</div>
+
+<div class="form-group">
+    <label>Suffix</label>
+    <p>@Model.Suffix</p>
+</div>
+
+<div class="form-group">
+    <label>Email Address</label>
+    <p>@Model.EmailAddress</p>
+</div>
+
+<div class="form-group">
+    <label>Phone</label>
+    <p>@Model.Phone</p>
+</div>
+
+<div class="form-group">
+    <label>Password Hash</label>
+    <p>@Model.PasswordHash</p>
+</div>
+
+<div class="form-group">
+    <label>Password Salt</label>
+    <p>@Model.PasswordSalt</p>
+</div>
+
+<div class="form-group">
+    <label>Name Style</label>
+    <p>@Model.NameStyle ? "Mr./Ms." : "Dr./Prof."</p>
+</div>
+
+<a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>
+<a href="@Url.Action("Edit", new { id = Model.CustomerID })" class="btn btn-primary">Edit</a>
+<a href="@Url.Action("Delete", new { id = Model.CustomerID })" class="btn btn-danger">Delete</a>
+

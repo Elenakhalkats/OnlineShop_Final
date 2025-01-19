@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineShop.Application.Interfaces;
 using OnlineShop.Application.Models.Products;
+using OnlineShop.Domain.Entites;
 
 namespace OnlineShop.Web.Controllers;
 
@@ -17,8 +19,11 @@ public class ProductController : Controller
         var model = await _productService.GetPagedProductsAsync(page);
         return View(model);
     }
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
+        var categories = await _productService.GetAllProductCategoriesAsync();
+        ViewBag.ProductCategories = new SelectList(categories, "ProductCategoryID", "Name");
+
         return View();
     }
     [HttpPost]
@@ -33,6 +38,12 @@ public class ProductController : Controller
                 return View(model);
             }
 
+            var isProductNumberUnique = await _productService.IsUniqueProductNumber(model.ProductNumber);
+            if (!isProductNumberUnique)
+            {
+                ModelState.AddModelError("ProductNumber", "The product number must be unique.");
+                return View(model);
+            }
             await _productService.AddProductAsync(model);
             return RedirectToAction(nameof(Index));
         }
@@ -51,6 +62,9 @@ public class ProductController : Controller
     {
         var product = await _productService.GetProductByIdAsync(id);
         if (product == null) return NotFound();
+
+        var categories = await _productService.GetAllProductCategoriesAsync();
+        ViewBag.ProductCategories = new SelectList(categories, "ProductCategoryID", "Name", product.ProductCategoryID);
 
         return View(product);
     }

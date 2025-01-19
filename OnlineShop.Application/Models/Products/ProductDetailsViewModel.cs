@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OnlineShop.Application.Models.ProductCategories;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShop.Application.Models.Products;
 
@@ -37,4 +38,5 @@ public class ProductDetailsViewModel
     public Guid RowGuid { get; set; }
     [Required]
     public DateTime ModifiedDate { get; set; }
+    public ProductCategoryViewModel? ProductCategoryViewModel { get; set; }
 }

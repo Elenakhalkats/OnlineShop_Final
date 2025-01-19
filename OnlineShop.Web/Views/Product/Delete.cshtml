@@ -1,15 +1,16 @@
 ﻿@model OnlineShop.Application.Models.Products.ProductDetailsViewModel
-
 @{
     ViewData["Title"] = "Delete Product";
 }
 
-<h1>Delete Product</h1>
+<div class="container">
+    <h1>Delete Product</h1>
 
-<p>Are you sure you want to delete the product <strong>@Model.Name</strong>?</p>
+    <p>Are you sure you want to delete the product <strong>@Model.Name</strong>?</p>
 
-<form asp-action="DeleteConfirmed" method="post">
-    <input type="hidden" name="id" value="@Model.ProductID" />
-    <button type="submit" class="btn btn-danger">Delete</button>
-    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
-</form>
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" name="id" value="@Model.ProductID" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

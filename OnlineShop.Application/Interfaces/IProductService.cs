@@ -1,4 +1,5 @@
-﻿using OnlineShop.Application.Models.Products;
+﻿using OnlineShop.Application.Models.ProductCategories;
+using OnlineShop.Application.Models.Products;
 using OnlineShop.Domain.Entites;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace OnlineShop.Application.Interfaces;
 public interface IProductService
 {
     Task<IEnumerable<ProductListViewModel>> GetAllProductsAsync();
+    Task<IEnumerable<ProductCategoryViewModel>> GetAllProductCategoriesAsync();
     Task<ProductIndexPageViewModel> GetPagedProductsAsync(int page);
     Task<ProductDetailsViewModel?> GetProductDetailsByIdAsync(int productId);
     Task<ProductEditViewModel?> GetProductByIdAsync(int productId);
@@ -18,4 +20,5 @@ public interface IProductService
     Task DeleteProductAsync(int productId);
     Task AddProductAsync(ProductCreateViewModel product);
     Task<bool> IsUniqueName(string name);
+    Task<bool> IsUniqueProductNumber(string ProductNumbername);
 }

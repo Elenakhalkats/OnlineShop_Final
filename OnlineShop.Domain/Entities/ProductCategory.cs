@@ -5,7 +5,6 @@ namespace OnlineShop.Domain.Entites;
 public class ProductCategory
 {
     [Required]
-    [Key]
     public int ProductCategoryID { get; set; }
 
     [Required]

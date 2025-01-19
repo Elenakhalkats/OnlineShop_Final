@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OnlineShop.Application.Models.ProductCategories;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShop.Application.Models.Products;
 
@@ -32,4 +33,5 @@ public class ProductEditViewModel : BaseProductViewModel
     [Range(0, double.MaxValue, ErrorMessage = "Weight must be a positive value.")]
     public decimal? Weight { get; set; }
     public DateTime? DiscontinuedDate { get; set; }
+    public int? ProductCategoryID { get; set; }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using OnlineShop.Application.Models.Customers;
+using OnlineShop.Application.Models.ProductCategories;
 using OnlineShop.Application.Models.Products;
 using OnlineShop.Domain.Entites;
 
@@ -12,6 +13,8 @@ public class MappingProfile : Profile
         CreateMap<Product, ProductDetailsViewModel>();
         CreateMap<Product, ProductEditViewModel>();
         CreateMap<Product, ProductListViewModel>();
+
+        CreateMap<ProductCategory, ProductCategoryViewModel>();
 
         CreateMap<Customer, CustomerDetailsViewModel>();
         CreateMap<Customer, CustomerListViewModel>();

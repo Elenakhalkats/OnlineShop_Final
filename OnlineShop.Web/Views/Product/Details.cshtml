@@ -1,26 +1,96 @@
 ﻿@model OnlineShop.Application.Models.Products.ProductDetailsViewModel
-
 @{
     ViewData["Title"] = "Product Details";
 }
 
-<h1>Product Details</h1>
+<div class="container">
+    <h1>Product Details</h1>
 
-<div>
-    <h4>@Model.Name</h4>
-    <p><strong>Product Number:</strong> @Model.ProductNumber</p>
-    <p><strong>Color:</strong> @Model.Color</p>
-    <p><strong>Standard Cost:</strong> @Model.StandardCost</p>
-    <p><strong>List Price:</strong> @Model.ListPrice</p>
-    <p><strong>Size:</strong> @Model.Size</p>
-    <p><strong>Weight:</strong> @Model.Weight</p>
-    <p><strong>Product Category ID:</strong> @Model.ProductCategoryID</p>
-    <p><strong>Product Model ID:</strong> @Model.ProductModelID</p>
-    <p><strong>Sell Start Date:</strong> @Model.SellStartDate</p>
-    <p><strong>Sell End Date:</strong> @Model.SellEndDate</p>
-    <p><strong>Discontinued Date:</strong> @Model.DiscontinuedDate</p>
-    <p><strong>RowGuid:</strong> @Model.RowGuid</p>
-    <p><strong>Modified Date:</strong> @Model.ModifiedDate</p>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">@Model.Name</h4>
+
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th class="col-md-3">Product Number</th>
+                        <td>@Model.ProductNumber</td>
+                    </tr>
+                    <tr>
+                        <th class="col-md-3">Color</th>
+                        <td>@Model.Color</td> 
+                    </tr>
+                    <tr>
+                        <th class="col-md-3">Standard Cost</th>
+                        <td>@Model.StandardCost.ToString("C2")</td>
+                    </tr>
+                    <tr>
+                        <th class="col-md-3">List Price</th>
+                        <td>@Model.ListPrice.ToString("C2")</td> 
+                    </tr>
+                    <tr>
+                        <th class="col-md-3">Size</th>
+                        <td>@Model.Size</td>
+                    </tr>
+                    <tr>
+                        <th class="col-md-3">Weight</th>
+                        <td>@Model.Weight?.ToString("F2")</td>
+                    </tr>
+                    <tr>
+                        <th class="col-md-3">Product Category</th>
+                        <td>@Model.ProductCategoryViewModel?.Name</td>
+                    </tr>
+                    <tr>
+                        <th class="col-md-3">Product Model ID</th>
+                        <td>@Model.ProductModelID</td>
+                    </tr>
+                    <tr>
+                        <th class="col-md-3">Sell Start Date</th>
+                        <td>@Model.SellStartDate.ToString("MM/dd/yyyy")</td>
+                    </tr>
+                    <tr>
+                        <th class="col-md-3">Sell End Date</th>
+                        <td>@Model.SellEndDate?.ToString("MM/dd/yyyy")</td>
+                    </tr>
+                    <tr>
+                        <th class="col-md-3">Discontinued Date</th>
+                        <td>@Model.DiscontinuedDate?.ToString("MM/dd/yyyy")</td>
+                    </tr>
+                    <tr>
+                        <th class="col-md-3">Modified Date</th>
+                        <td>@Model.ModifiedDate.ToString("MM/dd/yyyy")</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="form-group mt-4">
+                <a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>
+                <a href="@Url.Action("Edit", new { id = Model.ProductID })" class="btn btn-primary">Edit</a>
+                <a href="@Url.Action("Delete", new { id = Model.ProductID })" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
 </div>
 
-<a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>
+<style>
+    table.table {
+        width: 100%;
+        margin-top: 20px;
+        border-spacing: 0;
+    }
+
+        table.table th,
+        table.table td {
+            padding: 10px;
+            vertical-align: middle;
+        }
+
+        table.table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        table.table td {
+            color: #495057;
+        }
+</style>

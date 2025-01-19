@@ -54,5 +54,5 @@ public class Product
     [Required]
     public DateTime ModifiedDate { get; set; }
     public bool IsDeleted { get; set; } = false;
-    public ProductCategory ProductCategory { get; set; }
+    public ProductCategory? ProductCategory { get; set; }
 }

@@ -1,51 +1,53 @@
 ﻿@model OnlineShop.Application.Models.Customers.CustomerEditViewModel
 
-<h1>Edit Customer</h1>
+<div class="container">
+    <h1>Edit Customer</h1>
 
-<form asp-action="Edit" method="post">
-    <div class="form-group">
-        @Html.HiddenFor(model => model.CustomerID)
-    </div>
+    <form asp-action="Edit" method="post">
+        <div class="form-group">
+            @Html.HiddenFor(model => model.CustomerID)
+        </div>
 
-    <div class="form-group">
-        <label asp-for="FirstName" class="control-label"></label>
-        <input asp-for="FirstName" class="form-control" />
-        <span asp-validation-for="FirstName" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="MiddleName" class="control-label"></label>
-        <input asp-for="MiddleName" class="form-control" />
-        <span asp-validation-for="MiddleName" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="MiddleName" class="control-label"></label>
+            <input asp-for="MiddleName" class="form-control" />
+            <span asp-validation-for="MiddleName" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="LastName" class="control-label"></label>
-        <input asp-for="LastName" class="form-control" />
-        <span asp-validation-for="LastName" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Suffix" class="control-label"></label>
-        <input asp-for="Suffix" class="form-control" />
-        <span asp-validation-for="Suffix" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="Suffix" class="control-label"></label>
+            <input asp-for="Suffix" class="form-control" />
+            <span asp-validation-for="Suffix" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="EmailAddress" class="control-label"></label>
-        <input asp-for="EmailAddress" class="form-control" />
-        <span asp-validation-for="EmailAddress" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="EmailAddress" class="control-label"></label>
+            <input asp-for="EmailAddress" class="form-control" />
+            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Phone" class="control-label"></label>
-        <input asp-for="Phone" class="form-control" />
-        <span asp-validation-for="Phone" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="Phone" class="control-label"></label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Save Changes</button>
-    <a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>
-</form>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>
+    </form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

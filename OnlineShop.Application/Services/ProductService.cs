@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using OnlineShop.Application.Interfaces;
+using OnlineShop.Application.Models.ProductCategories;
 using OnlineShop.Application.Models.Products;
 using OnlineShop.Domain.Entites;
 using OnlineShop.Infrastructure.Interfaces;
@@ -23,6 +24,13 @@ public class ProductService : IProductService
         var productViewModels = _mapper.Map<IEnumerable<ProductListViewModel>>(products);
 
         return productViewModels;
+    }
+    public async Task<IEnumerable<ProductCategoryViewModel>> GetAllProductCategoriesAsync()
+    {
+        var productCategories = await _productRepository.GetAllCategoriesAsync();
+        var productCategoriesViewModels = _mapper.Map<IEnumerable<ProductCategoryViewModel>>(productCategories);
+
+        return productCategoriesViewModels;
     }
     public async Task<ProductIndexPageViewModel> GetPagedProductsAsync(int page)
     {
@@ -73,6 +81,7 @@ public class ProductService : IProductService
         product.SellEndDate = viewModel.SellEndDate ?? product.SellEndDate;
         product.DiscontinuedDate = viewModel.DiscontinuedDate ?? product.DiscontinuedDate;
         product.ModifiedDate = DateTime.Now;
+        product.ProductCategoryID = viewModel.ProductCategoryID;
 
         await _productRepository.UpdateAsync(product);
     }
@@ -99,10 +108,14 @@ public class ProductService : IProductService
 
         await _productRepository.AddAsync(product);
     }
-
     public async Task<bool> IsUniqueName(string name)
     {
         var product = await _productRepository.GetByNameAsync(name);
+        return product == null;
+    }
+    public async Task<bool> IsUniqueProductNumber(string productNumber)
+    {
+        var product = await _productRepository.GetByProductNumberAsync(productNumber);
         return product == null;
     }
 }

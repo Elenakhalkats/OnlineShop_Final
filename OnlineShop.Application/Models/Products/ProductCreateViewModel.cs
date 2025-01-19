@@ -30,4 +30,5 @@ public class ProductCreateViewModel : BaseProductViewModel
     public decimal? Weight { get; set; }
 
     public DateTime? DiscontinuedDate { get; set; }
+    public int? ProductCategoryID { get; set; }
 }

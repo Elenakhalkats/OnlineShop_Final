@@ -40,12 +40,4 @@ public class CustomerDetailsViewModel
     [StringLength(25, ErrorMessage = "Phone number cannot be longer than 25 characters.")]
     [Phone(ErrorMessage = "Invalid phone number.")]
     public string? Phone { get; set; }
-
-    [Required(ErrorMessage = "Password hash is required.")]
-    [StringLength(128, ErrorMessage = "Password hash cannot be longer than 128 characters.")]
-    public string PasswordHash { get; set; }
-
-    [Required(ErrorMessage = "Password salt is required.")]
-    [StringLength(10, ErrorMessage = "Password salt cannot be longer than 10 characters.")]
-    public string PasswordSalt { get; set; }
 }

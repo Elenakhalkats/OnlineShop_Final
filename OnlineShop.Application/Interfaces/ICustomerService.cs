@@ -11,6 +11,7 @@ namespace OnlineShop.Application.Interfaces;
 public interface ICustomerService
 {
     Task<IEnumerable<CustomerListViewModel>> GetAllCustomersAsync();
+    Task<CustomerIndexPageViewModel> GetPagedCustomersAsync(int page);
     Task<CustomerDetailsViewModel?> GetCustomerDetailsByIdAsync(int customerId);
     Task<CustomerEditViewModel?> GetCustomerByIdAsync(int customerId);
     Task UpdateCustomerAsync(CustomerEditViewModel customer);

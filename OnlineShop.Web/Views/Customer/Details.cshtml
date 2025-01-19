@@ -33,18 +33,14 @@
 </div>
 
 <div class="form-group">
-    <label>Password Hash</label>
-    <p>@Model.PasswordHash</p>
-</div>
-
-<div class="form-group">
-    <label>Password Salt</label>
-    <p>@Model.PasswordSalt</p>
-</div>
-
-<div class="form-group">
     <label>Name Style</label>
-    <p>@Model.NameStyle ? "Mr./Ms." : "Dr./Prof."</p>
+    @if (Model.NameStyle)
+    {
+        <p>Mr.</p>
+    }else
+    {
+        <p>Ms.</p>
+    }
 </div>
 
 <a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>

@@ -40,30 +40,23 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="PasswordHash"></label>
-        <input asp-for="PasswordHash" class="form-control" type="password" />
-        <span asp-validation-for="PasswordHash" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="PasswordSalt"></label>
-        <input asp-for="PasswordSalt" class="form-control" type="password" />
-        <span asp-validation-for="PasswordSalt" class="text-danger"></span>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" type="password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="NameStyle"></label>
         <select asp-for="NameStyle" class="form-control">
-            <option value="true">Mr./Ms.</option>
-            <option value="false">Dr./Prof.</option>
+            <option value="true">Mr.</option>
+            <option value="false">Ms.</option>
         </select>
         <span asp-validation-for="NameStyle" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Create</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>
 </form>
-
-<a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -11,12 +11,23 @@ public class ProductRepository : IProductRepository
     {
         _context = context;
     }
-
     public async Task<IEnumerable<Product>> GetAllAsync()
     {
         return await _context.Product.Where(p => !p.IsDeleted).ToListAsync();
     }
-
+    public async Task<List<Product>> GetProductsPagedAsync(int page, int pageSize)
+    {
+        return await _context.Product
+                             .Where(p => !p.IsDeleted)
+                             .OrderBy(p => p.Name)
+                             .Skip((page - 1) * pageSize)
+                             .Take(pageSize)
+                             .ToListAsync();
+    }
+    public async Task<int> GetTotalProductCountAsync()
+    {
+        return await _context.Product.Where(p => !p.IsDeleted).CountAsync();
+    }
     public async Task<Product> GetByIdAsync(int id)
     {
         return await _context.Product.FirstOrDefaultAsync(p => p.ProductID == id && !p.IsDeleted);

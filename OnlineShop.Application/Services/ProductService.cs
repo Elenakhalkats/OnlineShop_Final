@@ -24,7 +24,26 @@ public class ProductService : IProductService
 
         return productViewModels;
     }
+    public async Task<ProductIndexPageViewModel> GetPagedProductsAsync(int page)
+    {
+        var pageSize = 8;
 
+        var totalProducts = await _productRepository.GetTotalProductCountAsync();
+        var totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
+
+        var products = await _productRepository.GetProductsPagedAsync(page, pageSize);
+        var productViewModels = _mapper.Map<IEnumerable<ProductListViewModel>>(products).ToList();
+
+        var viewModel = new ProductIndexPageViewModel
+        {
+            Products = productViewModels,
+            CurrentPage = page,
+            TotalPages = totalPages,
+            PageSize = pageSize
+        };
+
+        return viewModel;
+    }
     public async Task<ProductDetailsViewModel?> GetProductDetailsByIdAsync(int productId)
     {
         var product = await _productRepository.GetByIdAsync(productId);

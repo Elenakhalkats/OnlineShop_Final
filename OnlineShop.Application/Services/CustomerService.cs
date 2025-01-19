@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using OnlineShop.Application.Helpers;
 using OnlineShop.Application.Interfaces;
 using OnlineShop.Application.Models.Customers;
+using OnlineShop.Application.Models.Products;
 using OnlineShop.Domain.Entites;
 using OnlineShop.Infrastructure.Interfaces;
+using OnlineShop.Infrastructure.Repositories;
 
 namespace OnlineShop.Application.Services;
 
@@ -23,6 +26,26 @@ public class CustomerService : ICustomerService
 
         return customerViewModels;
     }
+    public async Task<CustomerIndexPageViewModel> GetPagedCustomersAsync(int page)
+    {
+        var pageSize = 8;
+
+        var totalCustomers = await _customerRepository.GetTotalCustomerCountAsync();
+        var totalPages = (int)Math.Ceiling((double)totalCustomers / pageSize);
+
+        var cutomers = await _customerRepository.GetCustomersPagedAsync(page, pageSize);
+        var cutomerViewModels = _mapper.Map<IEnumerable<CustomerListViewModel>>(cutomers).ToList();
+
+        var viewModel = new CustomerIndexPageViewModel
+        {
+            Customers = cutomerViewModels,
+            CurrentPage = page,
+            TotalPages = totalPages,
+            PageSize = pageSize
+        };
+
+        return viewModel;
+    }
     public async Task<CustomerDetailsViewModel?> GetCustomerDetailsByIdAsync(int customerId)
     {
         var customer = await _customerRepository.GetByIdAsync(customerId);
@@ -41,14 +64,10 @@ public class CustomerService : ICustomerService
     {
         var customer = await _customerRepository.GetByIdAsync(model.CustomerID);
 
-        customer.NameStyle = model.NameStyle;
-        customer.Title = model.Title;
         customer.FirstName = model.FirstName;
         customer.MiddleName = model.MiddleName;
         customer.LastName = model.LastName;
         customer.Suffix = model.Suffix;
-        customer.CompanyName = model.CompanyName;
-        customer.SalesPerson = model.SalesPerson;
         customer.EmailAddress = model.EmailAddress;
         customer.Phone = model.Phone;
         customer.ModifiedDate = DateTime.Now;
@@ -61,6 +80,8 @@ public class CustomerService : ICustomerService
     }
     public async Task AddCustomerAsync(CustomerCreateViewModel model)
     {
+        var (hashedPassword, salt) = PasswordHelper.CreatePasswordHashAndSalt(model.Password);
+
         var customer = new Customer
         {
             CustomerID = model.CustomerID,
@@ -74,8 +95,8 @@ public class CustomerService : ICustomerService
             SalesPerson = model.SalesPerson,
             EmailAddress = model.EmailAddress,
             Phone = model.Phone,
-            PasswordHash = model.PasswordHash,
-            PasswordSalt = model.PasswordSalt,
+            PasswordHash = hashedPassword,
+            PasswordSalt = salt,
             RowGuid = Guid.NewGuid(),
             ModifiedDate = DateTime.Now
         };

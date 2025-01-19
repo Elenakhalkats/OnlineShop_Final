@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Domain.Entites;
 using OnlineShop.Infrastructure.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineShop.Infrastructure.Repositories;
 
@@ -22,7 +17,19 @@ public class CustomerRepository : ICustomerRepository
     {
         return await _context.Customer.Where(p => !p.IsDeleted).ToListAsync();
     }
-
+    public async Task<List<Customer>> GetCustomersPagedAsync(int page, int pageSize)
+    {
+        return await _context.Customer
+                             .Where(p => !p.IsDeleted)
+                             .OrderBy(p => p.FirstName)
+                             .Skip((page - 1) * pageSize)
+                             .Take(pageSize)
+                             .ToListAsync();
+    }
+    public async Task<int> GetTotalCustomerCountAsync()
+    {
+        return await _context.Customer.Where(p => !p.IsDeleted).CountAsync();
+    }
     public async Task<Customer> GetByIdAsync(int id)
     {
         return await _context.Customer.FirstOrDefaultAsync(p => p.CustomerID == id && !p.IsDeleted);

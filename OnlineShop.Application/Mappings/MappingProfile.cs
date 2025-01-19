@@ -13,6 +13,8 @@ public class MappingProfile : Profile
         CreateMap<Product, ProductEditViewModel>();
         CreateMap<Product, ProductListViewModel>();
 
+        CreateMap<Customer, CustomerDetailsViewModel>();
         CreateMap<Customer, CustomerListViewModel>();
+        CreateMap<Customer, CustomerEditViewModel>();
     }
 }

@@ -10,6 +10,8 @@ namespace OnlineShop.Infrastructure.Interfaces;
 public interface ICustomerRepository
 {
     Task<IEnumerable<Customer>> GetAllAsync();
+    Task<List<Customer>> GetCustomersPagedAsync(int page, int pageSize);
+    Task<int> GetTotalCustomerCountAsync();
     Task<Customer> GetByIdAsync(int id);
     Task AddAsync(Customer customer);
     Task UpdateAsync(Customer customer);

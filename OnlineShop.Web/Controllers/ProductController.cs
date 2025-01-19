@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Application.Interfaces;
 using OnlineShop.Application.Models.Products;
-using OnlineShop.Domain.Entites;
 
 namespace OnlineShop.Web.Controllers;
 
@@ -13,18 +12,15 @@ public class ProductController : Controller
     {
         _productService = productService;
     }
-
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1)
     {
-        var products = await _productService.GetAllProductsAsync();
-        var viewModel = products.ToList();
-        return View(viewModel);
+        var model = await _productService.GetPagedProductsAsync(page);
+        return View(model);
     }
     public IActionResult Create()
     {
         return View();
     }
-
     [HttpPost]
     public async Task<IActionResult> Create(ProductCreateViewModel model)
     {

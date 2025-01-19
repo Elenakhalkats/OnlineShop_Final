@@ -11,6 +11,7 @@ namespace OnlineShop.Application.Interfaces;
 public interface IProductService
 {
     Task<IEnumerable<ProductListViewModel>> GetAllProductsAsync();
+    Task<ProductIndexPageViewModel> GetPagedProductsAsync(int page);
     Task<ProductDetailsViewModel?> GetProductDetailsByIdAsync(int productId);
     Task<ProductEditViewModel?> GetProductByIdAsync(int productId);
     Task UpdateProductAsync(ProductEditViewModel product);
